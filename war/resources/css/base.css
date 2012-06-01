@@ -1,0 +1,34 @@
+	
+html, body {
+	background:#B2DFF4 url(../img/blank.png) right top no-repeat;
+	font-family:sans, Arial, sans-serif;
+	font-size:14px;	
+}
+
+a {
+	color:blue;
+}
+
+#page {
+	padding:10px;
+}
+
+#header {
+	background: transparent url(../img/blank.gif) left top no-repeat;
+	height:91px;
+	position:relative;
+	text-align:right;
+}
+
+#content {
+	padding-top:10px;
+}
+	#content > h1 {
+		font-size:1.5em;
+		padding-bottom:10px;
+	}
+	#content > .buttons {
+		padding-bottom:10px;
+	}
+
+	
