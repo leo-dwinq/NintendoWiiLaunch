@@ -1,0 +1,80 @@
+<project default="deploy">
+   <property name="targetdir" value="war"/>
+   <property name="contentdir" value="war"/>
+   <property name="wwwdir" value="${basedir}/war"/>
+   <property name="srcdir" value="${basedir}/src"/>
+   <property name="bindir" value="${basedir}/war/WEB-INF/classes"/>
+   <property name="libdir" value="${basedir}/war/WEB-INF/lib"/>
+   <property name="rootlibdir" value="${basedir}/lib"/>
+   <property name="depl" value="${basedir}/depl"/>
+
+   <path id="classpath">
+      <pathelement location="${srcdir}"/>
+      <pathelement location="${bindir}"/>
+      <pathelement location="${libdir}/antlr-2.7.6.jar"/>
+	  <pathelement location="${libdir}/commons-collections-3.1.jar"/>
+	  <pathelement location="${libdir}/commons-fileupload-1.2.2.jar"/>
+	  <pathelement location="${libdir}/commons-logging-1.1.1.jar"/>
+	  <pathelement location="${libdir}/commons-logging.jar"/>
+	  <pathelement location="${libdir}/commons-pool.jar"/>
+	  <pathelement location="${libdir}/dom4j-1.6.1.jar"/>
+	  <pathelement location="${libdir}/hibernate-jpa-2.0-api-1.0.0.Final.jar"/>
+	  <pathelement location="${libdir}/hibernate3.jar"/>
+	  <pathelement location="${libdir}/mysql-connector-java-5.1.13-bin.jar"/>
+	  <pathelement location="${libdir}/org.springframework.asm-3.0.3.RELEASE.jar"/>
+	  <pathelement location="${libdir}/org.springframework.beans-3.0.3.RELEASE.jar"/>
+	  <pathelement location="${libdir}/org.springframework.context-3.0.3.RELEASE.jar"/>
+	  <pathelement location="${libdir}/org.springframework.context.support-3.0.3.RELEASE.jar"/>
+	  <pathelement location="${libdir}/org.springframework.core-3.0.3.RELEASE.jar"/>
+	  <pathelement location="${libdir}/org.springframework.expression-3.0.3.RELEASE.jar"/>
+	  <pathelement location="${libdir}/org.springframework.jdbc-3.0.3.RELEASE.jar"/>
+	  <pathelement location="${libdir}/org.springframework.orm-3.0.3.RELEASE.jar"/>
+	  <pathelement location="${libdir}/org.springframework.transaction-3.0.3.RELEASE.jar"/>
+	  <pathelement location="${libdir}/org.springframework.web-3.0.3.RELEASE.jar"/>
+	  <pathelement location="${libdir}/org.springframework.web.servlet-3.0.3.RELEASE.jar"/>
+	  <pathelement location="${libdir}/spring-security-core-3.0.3.RELEASE.jar"/>
+	  <pathelement location="${libdir}/spring-security-web-3.0.3.RELEASE.jar"/>
+	  <pathelement location="${libdir}/javassist-3.12.0.GA.jar"/>
+	  <pathelement location="${libdir}/xstream-1.3.1.jar"/>
+	  <pathelement location="${libdir}/ehcache-core-2.3.0.jar"/>
+	  <pathelement location="${libdir}/commons-lang-2.5.jar"/>
+	  <pathelement location="${libdir}/slf4j-api-1.5.11.jar"/>
+	  <pathelement location="${libdir}/spring-hibernate3-2.0-m2.jar"/>
+	  <pathelement location="${libdir}/log4j-1.2.16.jar"/>
+	  <pathelement location="${rootlibdir}/javaee.jar"/>
+	  <pathelement location="${libdir}/jreform-1.2.1.jar"/>
+	  <pathelement location="${libdir}/spring-test-2.5.6.jar"/>
+      <pathelement location="${libdir}/junit-4.8.2.jar"/>
+   </path>
+
+   <target name="compile">
+      <mkdir dir="${targetdir}/WEB-INF/classes"/>
+      <javac srcdir="${srcdir}"
+         destdir="${targetdir}/WEB-INF/classes">
+         <classpath refid="classpath"/>
+      </javac>
+   </target>
+	
+   <target name="deploy" depends="compile">
+
+	  <copy todir="${targetdir}/WEB-INF/classes">
+	    <file file="${srcdir}/log4j.properties"/>
+	  </copy>
+   	
+	  <mkdir dir="${targetdir}/WEB-INF/lib"/>
+   	<!--
+      <copy todir="${targetdir}/WEB-INF/lib">
+	    <fileset dir="${libdir}"/>
+	  </copy>
+	  -->
+   	
+   	  <delete file="${basedir}/bin/NintendoRegistration.war"/>
+	  <jar jarfile="${basedir}/bin/NintendoRegistration.war">
+	            <fileset dir="${targetdir}" includes="**"/>
+	  </jar>
+   	
+   	<!--
+ 	  <delete dir="${targetdir}/WEB-INF/lib"/>
+   	-->
+   </target>
+</project>
